@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Produit - YouZinElegancia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="add-product.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md relative z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <button class="lg:hidden mr-4 p-2" id="menuToggle">
+                        <i class="fas fa-bars text-gray-600"></i>
+                    </button>
+                    <h1 class="text-2xl font-bold text-blue-600">YouZinElegancia</h1>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <span data-translate="dashboard">Tableau de bord</span>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <span data-translate="products">Produits</span>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <span data-translate="orders">Commandes</span>
+                    </a>
+                </nav>
+
+                <!-- Language Switcher & User Menu -->
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div class="relative">
+                        <select id="languageSelect" class="bg-transparent border border-gray-300 rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="fr">FR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+
+                    <!-- User Dropdown -->
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors" id="userDropdown">
+                            <i class="fas fa-user-circle text-xl"></i>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden" id="userMenu">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <span data-translate="dashboard">Tableau de bord</span>
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <span data-translate="account_settings">Paramètres du compte</span>
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <span data-translate="logout">Déconnexion</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="lg:hidden bg-white border-t border-gray-200 hidden" id="mobileMenu">
+            <div class="px-4 py-2 space-y-1">
+                <a href="#" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
+                    <span data-translate="dashboard">Tableau de bord</span>
+                </a>
+                <a href="#" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
+                    <span data-translate="products">Produits</span>
+                </a>
+                <a href="#" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
+                    <span data-translate="orders">Commandes</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Title -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                <span data-translate="add_product">Ajouter un Produit</span>
+            </h2>
+            <p class="text-gray-600">
+                <span data-translate="add_product_subtitle">Créez un nouveau produit pour votre boutique</span>
+            </p>
+        </div>
+
+        <!-- Form -->
+        <form method="POST" enctype="multipart/form-data" id="addProductForm" action="#" class="space-y-8">
+            <!-- Product Details Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 form-section">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                    <span data-translate="product_details">Détails du Produit</span>
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Product Name -->
+                    <div class="form-group">
+                        <label class="form-label" for="product_name">
+                            <span data-translate="product_name">Nom du Produit</span> *
+                        </label>
+                        <input type="text" id="product_name" name="product_name" class="form-input" required>
+                    </div>
+
+                    <!-- SKU -->
+                    <div class="form-group">
+                        <label class="form-label" for="sku">
+                            <span data-translate="sku">SKU</span>
+                        </label>
+                        <input type="text" id="sku" name="sku" class="form-input">
+                    </div>
+
+                    <!-- Price -->
+                    <div class="form-group">
+                        <label class="form-label" for="price">
+                            <span data-translate="price">Prix</span> *
+                        </label>
+                        <input type="number" id="price" name="price" step="0.01" class="form-input" required>
+                    </div>
+
+                    <!-- Currency -->
+                    <div class="form-group">
+                        <label class="form-label" for="currency">
+                            <span data-translate="currency">Devise</span>
+                        </label>
+                        <select id="currency" name="currency" class="form-input">
+                            <option value="EUR">EUR (€)</option>
+                            <option value="USD">USD ($)</option>
+                            <option value="DZD">DZD (د.ج)</option>
+                            <option value="GBP">GBP (£)</option>
+                        </select>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="form-group md:col-span-2">
+                        <label class="form-label" for="category">
+                            <span data-translate="category">Catégorie</span> *
+                        </label>
+                        <select id="category" name="category" class="form-input" required>
+                            <option value="">
+                                <span data-translate="select_category">Sélectionner une catégorie</span>
+                            </option>
+                            <option value="electronics">Électronique</option>
+                            <option value="clothing">Vêtements</option>
+                            <option value="books">Livres</option>
+                            <option value="home">Maison</option>
+                            <option value="beauty">Beauté</option>
+                            <option value="sports">Sports</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rich Description Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 form-section">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-align-left text-purple-600 mr-2"></i>
+                    <span data-translate="description">Description</span>
+                </h3>
+                
+                <!-- Rich Text Editor Toolbar -->
+                <div class="border border-gray-300 rounded-t-lg bg-gray-50 p-2 flex space-x-2">
+                    <button type="button" class="toolbar-btn" data-command="bold">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-command="italic">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-command="underline">
+                        <i class="fas fa-underline"></i>
+                    </button>
+                    <div class="border-l border-gray-300 mx-2"></div>
+                    <button type="button" class="toolbar-btn" data-command="insertUnorderedList">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-command="insertOrderedList">
+                        <i class="fas fa-list-ol"></i>
+                    </button>
+                </div>
+                
+                <!-- Rich Text Editor -->
+                <div id="richTextEditor" class="border border-gray-300 border-t-0 rounded-b-lg p-4 min-h-32 focus:outline-none focus:ring-2 focus:ring-blue-500" contenteditable="true"></div>
+                <input type="hidden" id="description" name="description">
+            </div>
+
+            <!-- Inventory Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 form-section">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-boxes text-green-600 mr-2"></i>
+                    <span data-translate="inventory">Inventaire</span>
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Quantity -->
+                    <div class="form-group">
+                        <label class="form-label" for="quantity">
+                            <span data-translate="quantity">Quantité</span> *
+                        </label>
+                        <input type="number" id="quantity" name="quantity" class="form-input" min="0" required>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label class="form-label" for="status">
+                            <span data-translate="status">Statut</span>
+                        </label>
+                        <select id="status" name="status" class="form-input">
+                            <option value="active">
+                                <span data-translate="active">Actif</span>
+                            </option>
+                            <option value="inactive">
+                                <span data-translate="inactive">Inactif</span>
+                            </option>
+                            <option value="draft">
+                                <span data-translate="draft">Brouillon</span>
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Featured -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span data-translate="featured">Produit Vedette</span>
+                        </label>
+                        <div class="flex items-center mt-2">
+                            <input type="checkbox" id="featured" name="featured" value="1" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                            <label for="featured" class="ml-2 text-sm text-gray-600">
+                                <span data-translate="mark_as_featured">Marquer comme produit vedette</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 form-section">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-images text-indigo-600 mr-2"></i>
+                    <span data-translate="media">Médias</span>
+                </h3>
+                
+                <div class="form-group">
+                    <label class="form-label" for="images">
+                        <span data-translate="product_images">Images du Produit</span>
+                        <span class="text-sm text-gray-500 ml-2">
+                            (<span data-translate="max_5_images">Maximum 5 images</span>)
+                        </span>
+                    </label>
+                    <input type="file" id="images" name="images[]" multiple accept="image/*" class="form-input">
+                    <div id="imagePreview" class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+                </div>
+            </div>
+
+            <!-- Physical Properties Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 form-section">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-ruler text-orange-600 mr-2"></i>
+                    <span data-translate="physical_properties">Propriétés Physiques</span>
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Weight -->
+                    <div class="form-group">
+                        <label class="form-label" for="weight">
+                            <span data-translate="weight">Poids (kg)</span>
+                        </label>
+                        <input type="number" id="weight" name="weight" step="0.01" class="form-input">
+                    </div>
+
+                    <!-- Width -->
+                    <div class="form-group">
+                        <label class="form-label" for="width">
+                            <span data-translate="width">Largeur (cm)</span>
+                        </label>
+                        <input type="number" id="width" name="width" step="0.01" class="form-input">
+                    </div>
+
+                    <!-- Height -->
+                    <div class="form-group">
+                        <label class="form-label" for="height">
+                            <span data-translate="height">Hauteur (cm)</span>
+                        </label>
+                        <input type="number" id="height" name="height" step="0.01" class="form-input">
+                    </div>
+
+                    <!-- Depth -->
+                    <div class="form-group">
+                        <label class="form-label" for="depth">
+                            <span data-translate="depth">Profondeur (cm)</span>
+                        </label>
+                        <input type="number" id="depth" name="depth" step="0.01" class="form-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 form-section">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-search text-red-600 mr-2"></i>
+                    <span data-translate="seo">SEO</span>
+                </h3>
+                
+                <div class="space-y-6">
+                    <!-- SEO Title -->
+                    <div class="form-group">
+                        <label class="form-label" for="seo_title">
+                            <span data-translate="seo_title">Titre SEO</span>
+                        </label>
+                        <input type="text" id="seo_title" name="seo_title" class="form-input">
+                        <p class="text-sm text-gray-500 mt-1">
+                            <span data-translate="seo_title_help">Recommandé: 50-60 caractères</span>
+                        </p>
+                    </div>
+
+                    <!-- SEO Description -->
+                    <div class="form-group">
+                        <label class="form-label" for="seo_description">
+                            <span data-translate="seo_description">Description SEO</span>
+                        </label>
+                        <textarea id="seo_description" name="seo_description" rows="3" class="form-input"></textarea>
+                        <p class="text-sm text-gray-500 mt-1">
+                            <span data-translate="seo_description_help">Recommandé: 150-160 caractères</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex justify-end space-x-4">
+                <button type="button" class="btn btn-secondary">
+                    <span data-translate="cancel">Annuler</span>
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span data-translate="add_product">Ajouter le Produit</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 flex items-center space-x-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <span class="text-gray-700">
+                <span data-translate="processing">Traitement en cours...</span>
+            </span>
+        </div>
+    </div>
+
+    <script src="add-product.js"></script>
+</body>
+</html>
